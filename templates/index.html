@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>スキンケア製品情報 PDF生成</title>
+    <style>
+        body { font-family: sans-serif; margin: 2rem; background-color: #f4f4f4; }
+        .container { max-width: 800px; margin: 0 auto; background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        h1 { text-align: center; color: #333; }
+        .product-fieldset { border: 2px solid #ddd; padding: 1.5rem; margin-bottom: 2rem; border-radius: 6px; position: relative; }
+        .product-fieldset legend { font-weight: bold; color: #007bff; padding: 0 10px; font-size: 1.2rem; }
+        .form-group { margin-bottom: 1rem; }
+        label { display: block; margin-bottom: 0.5rem; font-weight: bold; }
+        input[type="text"], input[type="url"], textarea { width: 100%; padding: 0.8rem; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-radius; }
+        textarea { resize: vertical; height: 150px; }
+        .btn { padding: 0.8rem 1.5rem; border: none; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+        .btn-add { background-color: #28a745; color: white; margin-bottom: 1rem; }
+        .btn-submit { background-color: #007bff; color: white; width: 100%; font-size: 1.2rem; }
+        .btn-remove { background-color: #dc3545; color: white; padding: 0.5rem 1rem; position: absolute; top: 10px; right: 10px; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>スキンケア製品情報 PDF生成ツール</h1>
+        <p>皮膚科の先生に渡す、使用中のスキンケア製品情報を入力してください。<br>「製品を追加」ボタンで、複数の商品をまとめて1つのPDFに作成できます。</p>
+        
+        <form method="post">
+            <div id="product-container">
+                <div class="product-fieldset" id="product-0">
+                    <legend>製品 #1</legend>
+                    <div class="form-group">
+                        <label for="product_name_0">■ 商品名 (例: 〇〇〇〇 保湿化粧水)</label>
+                        <input type="text" id="product_name_0" name="product_name[]" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="product_url_0">■ 商品URL (QRコード生成用)</label>
+                        <input type="url" id="product_url_0" name="product_url[]" placeholder="https://www.example.com/..." required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ingredients_0">■ 全成分表示 (コピー＆ペースト)</label>
+                        <textarea id="ingredients_0" name="ingredients[]" required></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <button type="button" class="btn btn-add" id="add-product-btn">＋ 製品を追加</button>
+            <button type="submit" class="btn btn-submit">まとめてPDFを生成・ダウンロード</button>
+        </form>
+    </div>
+
+    <script>
+        // JavaScriptで動的にフォームを追加・削除
+        let productCount = 1; // 最初の製品は #0
+
+        document.getElementById('add-product-btn').addEventListener('click', () => {
+            productCount++;
+            const container = document.getElementById('product-container');
+            const originalFieldset = document.getElementById('product-0');
+            const newFieldset = originalFieldset.cloneNode(true);
+
+            // クローンのIDを変更
+            newFieldset.id = `product-${productCount}`;
+            newFieldset.querySelector('legend').innerText = `製品 #${productCount}`;
+
+            // クローン内の入力フィールドのIDとnameを変更し、値をクリア
+            const inputs = newFieldset.querySelectorAll('input, textarea');
+            inputs.forEach(input => {
+                const oldId = input.id;
+                const newId = oldId.replace('_0', `_${productCount - 1}`);
+                input.id = newId;
+                input.value = ''; // 値をクリア
+                
+                // labelのfor属性も変更
+                const label = newFieldset.querySelector(`label[for="${oldId}"]`);
+                if (label) {
+                    label.setAttribute('for', newId);
+                }
+            });
+
+            // 削除ボタンを追加
+            const removeBtn = document.createElement('button');
+            removeBtn.type = 'button';
+            removeBtn.classList.add('btn', 'btn-remove');
+            removeBtn.innerText = '削除';
+            removeBtn.addEventListener('click', () => {
+                container.removeChild(newFieldset);
+            });
+            newFieldset.appendChild(removeBtn);
+
+            container.appendChild(newFieldset);
+        });
+    </script>
+</body>
+</html>

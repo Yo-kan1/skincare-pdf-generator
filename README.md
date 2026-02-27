@@ -17,8 +17,31 @@
 - **QR Code**: qrcode, Pillow
 - **Frontend**: HTML, CSS, JavaScript (Vanilla)
 
-## 使い方 (Usage)
-1. ローカルサーバーを起動します (`python app.py`)
-2. ブラウザで `http://127.0.0.1:5000` にアクセスします。
-3. 製品情報を入力し、「製品を追加」ボタンで必要な分だけフォームを増やします。
-4. 「まとめてPDFを生成・ダウンロード」をクリックすると、PDFが生成されます。
+## 環境構築と使い方 (Setup & Usage)
+
+1. **リポジトリの準備**
+   任意のディレクトリにファイルを配置し、ターミナルでそのフォルダに移動します。
+
+2. **仮想環境の作成と有効化**
+   Pythonの仮想環境（venv）を作成し、有効化します。
+   ```bash
+   # Windowsの場合
+   python -m venv venv
+   .\venv\Scripts\activate
+
+   # Mac/Linuxの場合
+   python3 -m venv venv
+   source venv/bin/activate
+
+3. **必要なライブラリのインストール**
+   requirements.txt を使用して、必要なパッケージを一括インストールします。
+   ```bash
+   pip install -r requirements.txt
+
+4. **アプリケーションの起動**
+   以下のコマンドでローカルサーバーを立ち上げます。
+   ```bash
+   python app.py
+
+5. **ブラウザでアクセス**
+   ブラウザを開き、以下のURLにアクセスしてツールを利用します。
