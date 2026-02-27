@@ -1,2 +1,24 @@
-# skincare-pdf-generator
-皮膚科医へスキンケア製品の成分や詳細情報をスムーズに共有するためのPDF生成Webツール。（A Flask-based tool that creates A4 PDF summaries of skincare ingredients, URLs, and QR codes for medical consultations.）
+# Skincare PDF Generator (仮名)
+
+皮膚科の診察時に、現在使用しているスキンケア製品（洗顔料、化粧水など）の情報を医師へスムーズかつ正確に伝えるためのPDF生成Webツールです。
+
+## 概要 (Description)
+スキンケア製品の「商品名」「公式URL」「全成分表示」をWebフォームから入力することで、自動的にURLのQRコードを生成し、医師が確認しやすいレイアウト（A4縦・ヘッダー集約型）のPDFファイルを一括出力します。成分が多い商品でも、読みやすく整理された状態で印刷・共有が可能です。
+
+## 主な機能 (Features)
+- **Webフォーム入力**: 複数の製品情報をブラウザ上から簡単に入力・追加可能。
+- **QRコード自動生成**: 製品のURLからQRコードを動的に生成し、PDFに配置。
+- **PDF一括生成**: 複数の製品を1つのPDFファイル（1製品1ページ）としてまとめて出力。
+- **最適化されたレイアウト**: 医師がパッと見て重要情報（製品名、QR、成分）を把握できる構成。
+
+## 使用技術 (Tech Stack)
+- **Backend**: Python 3, Flask
+- **PDF Generation**: ReportLab
+- **QR Code**: qrcode, Pillow
+- **Frontend**: HTML, CSS, JavaScript (Vanilla)
+
+## 使い方 (Usage)
+1. ローカルサーバーを起動します (`python app.py`)
+2. ブラウザで `http://127.0.0.1:5000` にアクセスします。
+3. 製品情報を入力し、「製品を追加」ボタンで必要な分だけフォームを増やします。
+4. 「まとめてPDFを生成・ダウンロード」をクリックすると、PDFが生成されます。
