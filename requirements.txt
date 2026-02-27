@@ -2,3 +2,4 @@ Flask
 reportlab
 qrcode
 Pillow
+gunicorn

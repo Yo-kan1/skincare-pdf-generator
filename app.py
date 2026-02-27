@@ -16,8 +16,9 @@ from reportlab.lib.utils import ImageReader
 app = Flask(__name__)
 
 # --------------------------------------------------
-FONTS_PATH = 'C:\\Windows\\Fonts\\msgothic.ttc' 
-FONT_NAME = 'MS_Gothic'
+# Azure(Linux)環境でも動くように、同じフォルダにあるフォントを読み込む
+FONTS_PATH = os.path.join(os.path.dirname(__file__), 'ipaexg.ttf')
+FONT_NAME = 'IPAexGothic'
 PAGE_SIZE = A4
 # --------------------------------------------------
 
