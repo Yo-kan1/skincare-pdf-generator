@@ -68,7 +68,7 @@ def create_multi_product_pdf(data_list):
         
         # --- タイトル ---
         c.setFont(FONT_NAME, 20)
-        c.drawCentredString(width / 2.0, current_y, f"【スキンケア製品情報】 ({data['name']})")
+        c.drawCentredString(width / 2.0, current_y, f"【スキンケア製品情報】")
         
         # --- ヘッダー領域の開始位置 ---
         current_y -= 15 * mm
