@@ -1,4 +1,4 @@
-# Skincare PDF Generator (仮名)
+# Skincare PDF Generator
 
 皮膚科の診察時に、現在使用しているスキンケア製品（洗顔料、化粧水など）の情報を医師へスムーズかつ正確に伝えるためのPDF生成Webツールです。
 
